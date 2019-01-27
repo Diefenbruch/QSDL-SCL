@@ -1,0 +1,118 @@
+1. Weitere Hashverfahren (z.B. Hash-Compaction-Methode)
+
+2. Interleaving von Outputs + Creates
+
+   Kann noch Vorbild der Requests gemacht werden !
+   Dazu: Suspends in Output()- Create()-Methode einfuegen.
+   Achtung! Auch der generierte Code muss angepasst werden.
+
+3. Neutralisieren von Variablen (intelligentes Histroy-Verfahren)
+
+   - Variablen, auf die als naechstes nur schreibend
+     zugegriffen werden kann, werden nach dem letzten
+     lesenden Zugriff auf einen neutralen Wert gesetzt.
+
+   - notwendig ist eine Erreichbarkeitsanalyse die jeden
+     SDL-Prozess exploriert und fuer jeden Automatenzustand
+     und jede Variable feststellen kann, ob auf 
+     die Variable als naechstes schreibend oder lesend
+     zugegriffen wird. Falls dies nicht immer entscheidbar ist
+     muss davon ausgegangen werden, dass sie gelesen wird.
+     
+   - Achtung: auch Atome beachten!
+   
+4. Laufzeitberechnung unter Linux funktioniert nicht richtig
+
+6. Textuelle Ausgaben der Sensoren als Excel oder GnuPlot
+
+7. Kuenstliche Erweiterung endlicher Systeme zu unendlichen
+   Systemen zu Verifikationszwecken
+   
+8. Event-Liste der SCL als Heap realisieren.
+
+   Eine generische Heap-Klasse ist bereits vorhanden:
+
+   SCHeap.tmpl.h
+
+9. Timer-bezogene Sensoren
+
+   Bisher gibt es in der SCL keine Timer-bezogenen Sensoren.
+   Denkbar waeren prozessspezifische Sensoren fuer folgende
+   Dinge:
+
+   1. Anzahl/Haeufigkeit von Timer-Set (optional begrenzt auf
+      bestimmte Timer-Typen)
+   2. Anzahl/Haeufigkeit von Timer-Reset (optional begrenzt auf
+      bestimmte Timer-Typen)
+   3. Anzahl/Haeufigkeit von Timer-Set (optional begrenzt auf
+      bestimmte Timer-Typen)
+   4. Anzahl/Haeufigkeit von Timer-Remove (optional begrenzt auf
+      bestimmte Timer-Typen)
+
+10. Explorations-Navigator:
+
+  Idee: Dem Benutzer soll waehrend der Exploration
+        per textuellem oder graphischem Interface
+        die Moeglichkeit zur Auswahl der naechsten
+        System-Transition ermoeglicht werden.
+
+  Umsetzung (Simulation):
+
+    Angepasst werden muss nur die Methode
+    SCIndetSim::ChooseRunnable(). Nach der
+    Bestimmung der activeRunnableList (mit
+    Hilfe der Methode ActiveRunnables())
+    wird ein Dialog dargestellt, der alle
+    Runnables der activeRunnableList (und
+    der enthaltenen Transitionen im Fall
+    von Prozessen) darstellt. Der Benutzer
+    waehlt dann per Nummer (textuelle Darstellung)
+    oder per Mausklick (graphische Darstellung)
+    die gewuenschte Transition aus.
+
+  Umsetzung (Exploration):
+
+    Zunaechst mal ueberlegen ob sinnvoll!
+    Moegliche Nutzen:
+
+    1. Auswahl der Explorations_reihenfolge_
+
+    2. Entscheidung welche Transitionen _nicht_
+       Exploriert werden sollen (filternde
+       Heuristik)
+
+11. In allen SCL-Klassen:
+
+    Datenmember in zwei Bereiche aufteilen (z.B. in Structs)
+    1. Zustandsrelevante Member
+    2. nicht zustandsrelevante Member
+
+12. SCIndetDFS und SCIndetBFS Klassen realisieren.
+    SCIndetVal und SCIndetVerify werden von SCIndetDFS
+    abgeleitet.
+
+13. ChooseRunnable von SSCIndetVal modularisieren und
+    Teile in SCIndetDFS schieben. Aber vorsicht!
+
+14. Wechsel zwischen den Indet-Objekten zur Laufzeit!
+
+    Simulation <-> Erreichbarkeitsanalyse
+
+    Simulation <-> Einzelschrittmodus (Navigator, s.o.)
+
+    Einzelschritt <-> Erreichbarkeitsanalyse
+
+15. Anpassung an JAVA-Thread-Konzept
+
+16. Verletzte Assertionen
+
+    Bisher: Werden als MSCs mit speziellen globalen Zustaenden
+            CycleJoinState und CycleStartState generiert.
+            
+    Verbesserung: CycleStartState kann im Prinzip entfernt
+                  werden da uninteressant.
+                  MSC 96 kann auch Zyklen definieren. SDT
+                  unterstuetzt MSC 96. Daher sollten wir das
+                  Loop-Konzept von MSC 96 zur Darstellung von
+                  Akzeptanz-Zyklen verweden.
+                  

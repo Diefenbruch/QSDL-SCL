@@ -2,7 +2,7 @@
 # Makefile fuer die SCL (Simulation Class Library)
 #
 #
-# $Author: hirche $
+# Author: Marc Diefenbruch
 # $Date: 1998/02/19 16:16:22 $
 #
 # (C) 1996 Universitaet GH Essen
@@ -555,6 +555,16 @@ $(PSDIR):
 	echo Generating   $(PSDIR)/$(notdir $@) form $< ...
 	$(MAKE_PS) $(MAKE_PS_FLAGS) $(PSDIR)/$(notdir $@) $<
 
+$(INCDIR): 
+	@if [ ! \( -d $(INCDIR) \) ]; then \
+		echo Creating $(INCDIR) ...; \
+		$(MKDIR) $(INCDIR); fi
+
+$(INCDIR)/SCL: $(INCDIR)
+	@if [ ! \( -d $(INCDIR)/SCL \) ]; then \
+		echo Creating $(INCDIR)/SCL ...; \
+		$(MKDIR) $(INCDIR)/SCL; fi
+
 $(DEPFILE):
 	$(TOUCH) $(DEPFILE)
 
@@ -564,7 +574,7 @@ install-lib: $(OUTPUT) $(LIBDIR)
 	echo Installing new library in $(LIBDIR) ...
 	$(CP)  $(OUTPUT) $(LIBDIR)
 
-install-includes: $(HEADERS) $(INSTALL_INLINES)
+install-includes: $(HEADERS) $(INSTALL_INLINES) $(INCDIR)/SCL
 	echo Deleting old include files from $(INCDIR)/SCL ...
 	-$(RM) $(INCDIR)/SCL/*.h
 	echo Installing new include files in $(INCDIR)/SCL ...

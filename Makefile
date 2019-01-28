@@ -20,6 +20,10 @@
 # -) make depend    : alle Abhaengigkeiten zwischen Projektdateien feststellen
 # -) make clean     : Objektdateien (*.o) und temporaere Dateien entfernen
 # -) make veryclean : make clean + rcsclean + alle Postscriptdateien entfernen
+# -) make git-pull  : pull sources from github
+# -) make git-push  : push sources to github
+# -) make git-add   : add changed sources to git staging
+# -) make git-commit: commit staged sources to git HEAD
 # -) make backup    : Backup von allen *.cpp *.h Dateien und dem Makefile
 # -) make find-error: Compilierungsfehler anzeigen
 #

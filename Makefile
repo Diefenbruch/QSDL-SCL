@@ -522,14 +522,14 @@ $(OUTPUT): $(OBJS)
 	$(AR) $(ARFLAGS) $(OUTPUT) $(OBJS) \
 		2>> $(LOGFILE)
 
-$(OBJDIR)/%.o : %.cpp
+$(OBJDIR)/%.o : %.cpp $(OBJDIR)
 	echo Compiling $< ...
 	$(C++) -c $(CFLAGS) $(TFLAGS) $(INCLUDES) -o $@  $< 2>>$(LOGFILE)
 
 $(OBJBASEDIR):
 	if [ ! \( -d $(OBJBASEDIR) \) ]; then \
-    echo Creating $(OBJBASEDIR) ...; \
-    $(MKDIR) $(OBJBASEDIR); fi
+		echo Creating $(OBJBASEDIR) ...; \
+		$(MKDIR) $(OBJBASEDIR); fi
 
 $(OBJDIR): $(OBJBASEDIR)
 	if [ ! \( -d $(OBJDIR) \) ]; then \

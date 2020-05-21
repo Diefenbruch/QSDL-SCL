@@ -125,7 +125,7 @@ template<class T> SCListCons<T> * SCListSave<T>::InsertBefore (T *toInsert,
 #if _SC_VALIDATION_DEBUG >= 2
   scValidationDebugLog << "SCListSave::InsertBefore(): adapting size of runnable " << *runnable;
   scValidationDebugLog << " to size = " << runnable->currentSize << "(+" << elemSize.size << ")";
-  scValidationDebugLog << " and hist size = " << runnable->currentHistorySize << "(+" << elemSize.historySize << ")" << endl;
+  scValidationDebugLog << " and hist size = " << runnable->currentHistorySize << "(+" << elemSize.historySize << ")" << std::endl;
 #endif
 
 #if _SC_VALIDATION_OPTIMIZE >= 2
@@ -177,7 +177,7 @@ template<class T> SCListCons<T> * SCListSave<T>::InsertBefore (T             *to
 #if _SC_VALIDATION_DEBUG >= 2
   scValidationDebugLog << "SCListSave::InsertBefore(): adapting size of runnable " << *runnable;
   scValidationDebugLog << " to size = " << runnable->currentSize << "(+" << elemSize.size <<")";
-  scValidationDebugLog << " and hist size = " << runnable->currentHistorySize << "(+" << elemSize.historySize << ")" << endl;
+  scValidationDebugLog << " and hist size = " << runnable->currentHistorySize << "(+" << elemSize.historySize << ")" << std::endl;
 #endif
 
 #if _SC_VALIDATION_OPTIMIZE >= 2
@@ -287,7 +287,7 @@ template<class T> SCListCons<T> * SCListSave<T>::InsertAfter (T             *toI
 #if _SC_VALIDATION_DEBUG >= 2
   scValidationDebugLog << "SCListSave::InsertAfter(): adapting size of runnable " << *runnable;
   scValidationDebugLog << " to size = " << runnable->currentSize << "(+" << elemSize.size <<")";
-  scValidationDebugLog << " and hist size = " << runnable->currentHistorySize << "(+" << elemSize.historySize << ")" << endl;
+  scValidationDebugLog << " and hist size = " << runnable->currentHistorySize << "(+" << elemSize.historySize << ")" << std::endl;
 #endif
 
 #if _SC_VALIDATION_OPTIMIZE >= 2
@@ -445,7 +445,7 @@ template<class T> T *SCListSave<T>::Remove (SCListCons<T> *element)
 #if _SC_VALIDATION_DEBUG >= 2
   scValidationDebugLog << "SCListSave::Remove(): adapting size of runnable " << *runnable;
   scValidationDebugLog << " to size = " << runnable->currentSize << "(-" << elemSize.size <<")";
-  scValidationDebugLog << " and hist size = " << runnable->currentHistorySize << "(-" << elemSize.historySize << ")" << endl;
+  scValidationDebugLog << " and hist size = " << runnable->currentHistorySize << "(-" << elemSize.historySize << ")" << std::endl;
 #endif
 
 #if _SC_VALIDATION_OPTIMIZE >= 2
@@ -495,7 +495,7 @@ template<class T> SCBoolean SCListSave<T>::Restore (SCMem &saveArea)
 {
   T *p = NULL;
   SCNatural i, number;
-  
+
 #if _SC_VALIDATION_OPTIMIZE >= 2
 
   size_t size, historySize;
@@ -510,12 +510,12 @@ template<class T> SCBoolean SCListSave<T>::Restore (SCMem &saveArea)
 
 #if _SC_VALIDATION_DEBUG >= 2
       scValidationDebugLog << "SCListSave::Restore(): skipped unchanged list with ";
-      scValidationDebugLog << numOfElems << " elements, ";
+      scValidationDebugLog << this->numOfElems << " elements, ";
       scValidationDebugLog << "size = " << currentSize;
-      scValidationDebugLog << ", history size = " << currentHistorySize << endl;
+      scValidationDebugLog << ", history size = " << currentHistorySize << std::endl;
       scValidationDebugLog << "SCListSave::Restore(): ";
       scValidationDebugLog << "offset now " << saveArea.GetOffset();
-      scValidationDebugLog << ", histoffset now " << saveArea.GetHistoryOffset() << endl;
+      scValidationDebugLog << ", histoffset now " << saveArea.GetHistoryOffset() << std::endl;
 #endif
 
       return true;
@@ -523,7 +523,7 @@ template<class T> SCBoolean SCListSave<T>::Restore (SCMem &saveArea)
     case kSCQueueEnqueued:
 #if _SC_VALIDATION_DEBUG >= 2
       scValidationDebugLog << "SCListSave::Restore(): remove tail from enqueued list with ";
-      scValidationDebugLog << numOfElems << " elements, ";
+      scValidationDebugLog << this->numOfElems << " elements, ";
       scValidationDebugLog << "size = " << currentSize;
       scValidationDebugLog << ", history size = " << currentHistorySize << std::endl;
 #endif
@@ -532,7 +532,7 @@ template<class T> SCBoolean SCListSave<T>::Restore (SCMem &saveArea)
 
 #if _SC_VALIDATION_DEBUG >= 2
       scValidationDebugLog << "SCListSave::Restore(): removed tail from enqueued list now ";
-      scValidationDebugLog << numOfElems << " elements, ";
+      scValidationDebugLog << this->numOfElems << " elements, ";
       scValidationDebugLog << "size = " << currentSize;
       scValidationDebugLog << ", history size = " << currentHistorySize << std::endl;
 #endif
@@ -543,7 +543,7 @@ template<class T> SCBoolean SCListSave<T>::Restore (SCMem &saveArea)
 #if _SC_VALIDATION_DEBUG >= 2
       scValidationDebugLog << "SCListSave::Restore(): ";
       scValidationDebugLog << "offset now " << saveArea.GetOffset();
-      scValidationDebugLog << ", histoffset now " << saveArea.GetHistoryOffset() << endl;
+      scValidationDebugLog << ", histoffset now " << saveArea.GetHistoryOffset() << std::endl;
 #endif
 
       return true;
@@ -565,12 +565,12 @@ template<class T> SCBoolean SCListSave<T>::Restore (SCMem &saveArea)
 
 #if _SC_VALIDATION_DEBUG >= 2
       scValidationDebugLog << "SCListSave::Restore(): reinsert head of dequeued list with ";
-      scValidationDebugLog << numOfElems << " elements, ";
+      scValidationDebugLog << this->numOfElems << " elements, ";
       scValidationDebugLog << "size = " << currentSize;
-      scValidationDebugLog << ", history size = " << currentHistorySize << endl;
+      scValidationDebugLog << ", history size = " << currentHistorySize << std::endl;
       scValidationDebugLog << "SCListSave::Restore(): ";
       scValidationDebugLog << "offset now " << saveArea.GetOffset();
-      scValidationDebugLog << ", histoffset now " << saveArea.GetHistoryOffset() << endl;
+      scValidationDebugLog << ", histoffset now " << saveArea.GetHistoryOffset() << std::endl;
 #endif
 
       return true;
@@ -613,7 +613,7 @@ template<class T> SCBoolean SCListSave<T>::Restore (SCMem &saveArea)
   saveArea.HistoryRestore(&number, sizeof(SCNatural));   // nicht in numOfElems einlesen!
 
 #if _SC_VALIDATION_DEBUG >= 2
-    scValidationDebugLog << "SCListSave::Restore(): found " << number << " elements in save area" << endl;
+    scValidationDebugLog << "SCListSave::Restore(): found " << number << " elements in save area" << std::endl;
 #endif
 
   ////////////////////

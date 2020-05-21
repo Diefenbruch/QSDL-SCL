@@ -191,11 +191,11 @@ SCBoolean SCProcessList::Save(SCMem& saveArea) const
       lastHistoryOffset = process->GetLastHistoryOffset();
 
 #if _SC_VALIDATION_DEBUG >= 3
-      scValidationDebugLog << "SCProcessList::Save(): using last stack elem for " << *process << endl;
-      scValidationDebugLog << "SCProcessList::Save(): at offset = " << lastOffset << endl;
-      scValidationDebugLog << "SCProcessList::Save(): at history offset = " << lastHistoryOffset << endl;
-      scValidationDebugLog << "SCProcessList::Save(): with size = " << process->currentSize << endl;
-      scValidationDebugLog << "SCProcessList::Save(): with history size = " << process->currentHistorySize << endl;
+      scValidationDebugLog << "SCProcessList::Save(): using last stack elem for " << *process << std::endl;
+      scValidationDebugLog << "SCProcessList::Save(): at offset = " << lastOffset << std::endl;
+      scValidationDebugLog << "SCProcessList::Save(): at history offset = " << lastHistoryOffset << std::endl;
+      scValidationDebugLog << "SCProcessList::Save(): with size = " << process->currentSize << std::endl;
+      scValidationDebugLog << "SCProcessList::Save(): with history size = " << process->currentHistorySize << std::endl;
 #endif
 
       // Neue Offset-Werte setzen (dies muss VOR Append() oder Save() geschehen!):
@@ -204,9 +204,9 @@ SCBoolean SCProcessList::Save(SCMem& saveArea) const
 
 #if _SC_VALIDATION_DEBUG >= 3
       scValidationDebugLog << "SCProcessList::Save(): setting new offset for " << *process;
-      scValidationDebugLog << " on " << process->GetLastOffset() << endl;
+      scValidationDebugLog << " on " << process->GetLastOffset() << std::endl;
       scValidationDebugLog << "SCProcessList::Save(): setting new history offset for " << *process;
-      scValidationDebugLog << " on " << process->GetLastHistoryOffset() << endl;
+      scValidationDebugLog << " on " << process->GetLastHistoryOffset() << std::endl;
 #endif
 
       saveArea.Append(*lastState,
@@ -222,9 +222,9 @@ SCBoolean SCProcessList::Save(SCMem& saveArea) const
 
 #if _SC_VALIDATION_DEBUG >= 3
       scValidationDebugLog << "SCProcessList::Save(): setting new offset for " << *process;
-      scValidationDebugLog << " on " << process->GetLastOffset() << endl;
+      scValidationDebugLog << " on " << process->GetLastOffset() << std::endl;
       scValidationDebugLog << "SCProcessList::Save(): setting new history offset for " << *process;
-      scValidationDebugLog << " on " << process->GetLastHistoryOffset() << endl;
+      scValidationDebugLog << " on " << process->GetLastHistoryOffset() << std::endl;
 #endif
 
       process->Save(saveArea);
@@ -271,13 +271,13 @@ SCBoolean SCProcessList::Save(SCMem& saveArea) const
       }
 #endif  //  _SC_VALIDATION_OPTIMIZE >= 2
       scValidationDebugLog << ", offset now " << saveArea.GetOffset();
-      scValidationDebugLog << " histoffset now " << saveArea.GetHistoryOffset() << endl;
+      scValidationDebugLog << " histoffset now " << saveArea.GetHistoryOffset() << std::endl;
     }
     else
     {      
       scValidationDebugLog << "SCProcessList::Save(): saved unchanged " << *process;
       scValidationDebugLog << ", offset now " << saveArea.GetOffset();
-      scValidationDebugLog << " histoffset now " << saveArea.GetHistoryOffset() << endl;
+      scValidationDebugLog << " histoffset now " << saveArea.GetHistoryOffset() << std::endl;
     }
 #endif  //  _SC_VALIDATION_OPTIMIZE
 
@@ -286,7 +286,7 @@ SCBoolean SCProcessList::Save(SCMem& saveArea) const
 #if _SC_VALIDATION_DEBUG >= 2
     scValidationDebugLog << "SCProcessList::Save(): saved " << *process;
     scValidationDebugLog << ", offset now " << saveArea.GetOffset();
-    scValidationDebugLog << " histoffset now " << saveArea.GetHistoryOffset() << endl;
+    scValidationDebugLog << " histoffset now " << saveArea.GetHistoryOffset() << std::endl;
 #endif
 
 #endif // _SC_VALIDATION_OPTIMIZE
@@ -359,9 +359,9 @@ SCBoolean SCProcessList::Restore(SCMem &saveArea)
       process->SetLastHistoryOffset(lastHistoryOffset);
 #if _SC_VALIDATION_DEBUG >= 3
       scValidationDebugLog << "SCProcessList::Restore(): setting new offset for " << *process;
-      scValidationDebugLog << " on " << lastOffset << endl;
+      scValidationDebugLog << " on " << lastOffset << std::endl;
       scValidationDebugLog << "SCProcessList::Restore(): setting new history offset for " << *process;
-      scValidationDebugLog << " on " << lastHistoryOffset << endl;
+      scValidationDebugLog << " on " << lastHistoryOffset << std::endl;
 #endif
 #endif
 
@@ -372,7 +372,7 @@ SCBoolean SCProcessList::Restore(SCMem &saveArea)
 #if _SC_VALIDATION_DEBUG >= 2
         scValidationDebugLog << "SCProcessList::Restore(): restored " << *process;
         scValidationDebugLog << ", offset now " << saveArea.GetOffset();
-        scValidationDebugLog << ", histoffset now " << saveArea.GetHistoryOffset() << endl;
+        scValidationDebugLog << ", histoffset now " << saveArea.GetHistoryOffset() << std::endl;
 #endif
       }
       else // process is NOT modified!
@@ -382,7 +382,7 @@ SCBoolean SCProcessList::Restore(SCMem &saveArea)
 #if _SC_VALIDATION_DEBUG >= 2
         scValidationDebugLog << "SCProcessList::Restore(): skipped unchanged " << *process;
         scValidationDebugLog << ", offset now " << saveArea.GetOffset() << "(+" << process->currentSize << ")";
-        scValidationDebugLog << ", histoffset now " << saveArea.GetHistoryOffset() << "(+" << process->currentHistorySize << ")" << endl;
+        scValidationDebugLog << ", histoffset now " << saveArea.GetHistoryOffset() << "(+" << process->currentHistorySize << ")" << std::endl;
 #endif
       }
 #else // !_SC_VALIDATION_OPTIMIZE
@@ -403,7 +403,7 @@ SCBoolean SCProcessList::Restore(SCMem &saveArea)
 #if _SC_VALIDATION_DEBUG >= 2
       scValidationDebugLog << "SCProcessList::Restore(): recreated " << *process;
       scValidationDebugLog << ", offset now " << saveArea.GetOffset();
-      scValidationDebugLog << ", histoffset now " << saveArea.GetHistoryOffset() << endl;
+      scValidationDebugLog << ", histoffset now " << saveArea.GetHistoryOffset() << std::endl;
 #endif
 
 #if _SC_VALIDATION_OPTIMIZE >= 3
@@ -411,9 +411,9 @@ SCBoolean SCProcessList::Restore(SCMem &saveArea)
       process->SetLastHistoryOffset(lastHistoryOffset);
 #if _SC_VALIDATION_DEBUG >= 3
       scValidationDebugLog << "SCProcessList::Restore(): setting new offset for " << *process;
-      scValidationDebugLog << " on " << lastOffset << endl;
+      scValidationDebugLog << " on " << lastOffset << std::endl;
       scValidationDebugLog << "SCProcessList::Restore(): setting new history offset for " << *process;
-      scValidationDebugLog << " on " << lastHistoryOffset << endl;
+      scValidationDebugLog << " on " << lastHistoryOffset << std::endl;
 #endif
 #endif
     } // if (process)
@@ -495,7 +495,7 @@ void SCProcessList::Size(SCSize *curSize) const
     scValidationDebugLog << ", size now " << curSize->size << "(+" << process->GetCurrentSize() << ")";
     scValidationDebugLog << ", hist size now " << curSize->historySize << "(+" << process->GetCurrentHistorySize() << ")";
 #endif
-    scValidationDebugLog << endl;
+    scValidationDebugLog << std::endl;
 #endif
 
 #if _SC_PROFILING

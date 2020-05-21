@@ -134,7 +134,7 @@
  * Valid values: 0, 1, 2 or 3
  */
 
-#define _SC_VALIDATION_DEBUG  0
+#define _SC_VALIDATION_DEBUG  3
 
 
 /* This flag changes the handling of time

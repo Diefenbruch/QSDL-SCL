@@ -140,11 +140,11 @@ SCBoolean SCProcedureList::Save(SCMem& saveArea) const
       lastHistoryOffset = procedure->GetLastHistoryOffset();
 
 #if _SC_VALIDATION_DEBUG >= 3
-      scValidationDebugLog << "SCProcedureList::Save(): using last stack elem for " << *procedure << endl;
-      scValidationDebugLog << "SCProcedureList::Save(): at offset = " << lastOffset << endl;
-      scValidationDebugLog << "SCProcedureList::Save(): at history offset = " << lastHistoryOffset << endl;
-      scValidationDebugLog << "SCProcedureList::Save(): with size = " << procedure->currentSize << endl;
-      scValidationDebugLog << "SCProcedureList::Save(): with history size = " << procedure->currentHistorySize << endl;
+      scValidationDebugLog << "SCProcedureList::Save(): using last stack elem for " << *procedure << std::endl;
+      scValidationDebugLog << "SCProcedureList::Save(): at offset = " << lastOffset << std::endl;
+      scValidationDebugLog << "SCProcedureList::Save(): at history offset = " << lastHistoryOffset << std::endl;
+      scValidationDebugLog << "SCProcedureList::Save(): with size = " << procedure->currentSize << std::endl;
+      scValidationDebugLog << "SCProcedureList::Save(): with history size = " << procedure->currentHistorySize << std::endl;
 #endif
 
       // Neue Offset-Werte setzen (dies muss VOR Append() oder Save() geschehen!):
@@ -153,9 +153,9 @@ SCBoolean SCProcedureList::Save(SCMem& saveArea) const
 
 #if _SC_VALIDATION_DEBUG >= 3
       scValidationDebugLog << "SCProcedureList::Save(): setting new offset for " << *procedure;
-      scValidationDebugLog << " on " << procedure->GetLastOffset() << endl;
+      scValidationDebugLog << " on " << procedure->GetLastOffset() << std::endl;
       scValidationDebugLog << "SCProcedureList::Save(): setting new history offset for " << *procedure;
-      scValidationDebugLog << " on " << procedure->GetLastHistoryOffset() << endl;
+      scValidationDebugLog << " on " << procedure->GetLastHistoryOffset() << std::endl;
 #endif
 
       saveArea.Append(*lastState,
@@ -171,9 +171,9 @@ SCBoolean SCProcedureList::Save(SCMem& saveArea) const
 
 #if _SC_VALIDATION_DEBUG >= 3
       scValidationDebugLog << "SCProcedureList::Save(): setting new offset for " << *procedure;
-      scValidationDebugLog << " on " << procedure->GetLastOffset() << endl;
+      scValidationDebugLog << " on " << procedure->GetLastOffset() << std::endl;
       scValidationDebugLog << "SCProcedureList::Save(): setting new history offset for " << *procedure;
-      scValidationDebugLog << " on " << procedure->GetLastHistoryOffset() << endl;
+      scValidationDebugLog << " on " << procedure->GetLastHistoryOffset() << std::endl;
 #endif
 
       procedure->Save(saveArea);
@@ -188,13 +188,13 @@ SCBoolean SCProcedureList::Save(SCMem& saveArea) const
     {
       scValidationDebugLog << "SCProcedureList::Save(): saved changed " << *procedure;
       scValidationDebugLog << ", offset now " << saveArea.GetOffset();
-      scValidationDebugLog << " histoffset now " << saveArea.GetHistoryOffset() << endl;
+      scValidationDebugLog << " histoffset now " << saveArea.GetHistoryOffset() << std::endl;
     }
     else
-    {      
+    {
       scValidationDebugLog << "SCProcedureList::Save(): saved unchanged " << *procedure;
       scValidationDebugLog << ", offset now " << saveArea.GetOffset();
-      scValidationDebugLog << " histoffset now " << saveArea.GetHistoryOffset() << endl;
+      scValidationDebugLog << " histoffset now " << saveArea.GetHistoryOffset() << std::endl;
     }
 #endif  //  _SC_VALIDATION_OPTIMIZE
 
@@ -203,7 +203,7 @@ SCBoolean SCProcedureList::Save(SCMem& saveArea) const
 #if _SC_VALIDATION_DEBUG >= 2
     scValidationDebugLog << "SCProcedureList::Save(): saved " << *procedure;
     scValidationDebugLog << ", offset now " << saveArea.GetOffset();
-    scValidationDebugLog << " histoffset now " << saveArea.GetHistoryOffset() << endl;
+    scValidationDebugLog << " histoffset now " << saveArea.GetHistoryOffset() << std::endl;
 #endif
 
 #endif // _SC_VALIDATION_OPTIMIZE
@@ -234,7 +234,7 @@ SCBoolean SCProcedureList::Restore(SCMem &saveArea)
 #endif
 
   RemoveAllElements();
-  
+
   saveArea.HistoryRestore(&number, sizeof(SCNatural)); // nicht in numOfElems einlesen!
 
   if (number == 0)
@@ -266,9 +266,9 @@ SCBoolean SCProcedureList::Restore(SCMem &saveArea)
       procedure->SetLastHistoryOffset(lastHistoryOffset);
 #if _SC_VALIDATION_DEBUG >= 3
       scValidationDebugLog << "SCProcedureList::Restore(): setting new offset for " << *procedure;
-      scValidationDebugLog << " on " << lastOffset << endl;
+      scValidationDebugLog << " on " << lastOffset << std::endl;
       scValidationDebugLog << "SCProcedureList::Restore(): setting new history offset for " << *procedure;
-      scValidationDebugLog << " on " << lastHistoryOffset << endl;
+      scValidationDebugLog << " on " << lastHistoryOffset << std::endl;
 #endif
 #endif
 
@@ -279,7 +279,7 @@ SCBoolean SCProcedureList::Restore(SCMem &saveArea)
 #if _SC_VALIDATION_DEBUG >= 2
         scValidationDebugLog << "SCProcedureList::Restore(): restored " << *procedure;
         scValidationDebugLog << ", offset now " << saveArea.GetOffset();
-        scValidationDebugLog << ", histoffset now " << saveArea.GetHistoryOffset() << endl;
+        scValidationDebugLog << ", histoffset now " << saveArea.GetHistoryOffset() << std::endl;
 #endif
       }
       else // procedure is NOT modified!
@@ -289,7 +289,7 @@ SCBoolean SCProcedureList::Restore(SCMem &saveArea)
 #if _SC_VALIDATION_DEBUG >= 2
         scValidationDebugLog << "SCProcedureList::Restore(): skipped unchanged " << *procedure;
         scValidationDebugLog << ", offset now " << saveArea.GetOffset() << "(+" << procedure->currentSize << ")";
-        scValidationDebugLog << ", histoffset now " << saveArea.GetHistoryOffset() << "(+" << procedure->currentHistorySize << ")" << endl;
+        scValidationDebugLog << ", histoffset now " << saveArea.GetHistoryOffset() << "(+" << procedure->currentHistorySize << ")" << std::endl;
 #endif
       }
 #else // !_SC_VALIDATION_OPTIMIZE
@@ -310,7 +310,7 @@ SCBoolean SCProcedureList::Restore(SCMem &saveArea)
 #if _SC_VALIDATION_DEBUG >= 2
       scValidationDebugLog << "SCProcedureList::Restore(): recreated " << *procedure;
       scValidationDebugLog << ", offset now " << saveArea.GetOffset();
-      scValidationDebugLog << ", histoffset now " << saveArea.GetHistoryOffset() << endl;
+      scValidationDebugLog << ", histoffset now " << saveArea.GetHistoryOffset() << std::endl;
 #endif
 
 #if _SC_VALIDATION_OPTIMIZE >= 3
@@ -318,9 +318,9 @@ SCBoolean SCProcedureList::Restore(SCMem &saveArea)
       procedure->SetLastHistoryOffset(lastHistoryOffset);
 #if _SC_VALIDATION_DEBUG >= 3
       scValidationDebugLog << "SCProcedureList::Restore(): setting new offset for " << *procedure;
-      scValidationDebugLog << " on " << lastOffset << endl;
+      scValidationDebugLog << " on " << lastOffset << std::endl;
       scValidationDebugLog << "SCProcedureList::Restore(): setting new history offset for " << *procedure;
-      scValidationDebugLog << " on " << lastHistoryOffset << endl;
+      scValidationDebugLog << " on " << lastHistoryOffset << std::endl;
 #endif
 #endif
     }
@@ -392,7 +392,7 @@ void SCProcedureList::Size(SCSize *curSize) const
     scValidationDebugLog << ", size now " << curSize->size << "(+" << procedure->GetCurrentSize() << ")";
     scValidationDebugLog << ", hist size now " << curSize->historySize << "(+" << procedure->GetCurrentHistorySize() << ")";
 #endif
-    scValidationDebugLog << endl;
+    scValidationDebugLog << std::endl;
 #endif
 
 #if _SC_PROFILING

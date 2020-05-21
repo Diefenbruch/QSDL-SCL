@@ -63,7 +63,7 @@ SCBitState::SCBitState (SCNatural hashTablePow,
                                                   // reduce the size of the hashtable.
 
   assert(hashTable);
-  
+
   hashTablePower = hashTablePow;
   hashMask = (1L << hashTablePower) - 1;          // Set mask for hashfunctions.
 }
@@ -80,10 +80,10 @@ SCBoolean SCBitState::IsStateAnalyzed(SCMem *state)
   register SCBoolean  result;                     // Temporary for result.
 
   register SCNatural  hash_value = (this->*hashFunction)(state);  // Calculate hash value.
-  
+
   result = hashTable[hash_value >> 3] & (1 << (hash_value & 7L));
                                                   // Extract bit at position hash_value.
-                                                  
+
   hashTable[hash_value >> 3] |= (1 << (hash_value & 7L));
                                                   // Set bit at position hash_value.
 

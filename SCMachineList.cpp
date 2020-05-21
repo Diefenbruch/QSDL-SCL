@@ -181,11 +181,11 @@ SCBoolean SCMachineList::Save(SCMem& saveArea) const
       lastHistoryOffset = machine->GetLastHistoryOffset();
 
 #if _SC_VALIDATION_DEBUG >= 3
-      scValidationDebugLog << "SCMachineList::Save(): using last stack elem for machine " << *machine << endl;
-      scValidationDebugLog << "SCMachineList::Save(): at offset = " << lastOffset << endl;
-      scValidationDebugLog << "SCMachineList::Save(): at history offset = " << lastHistoryOffset << endl;
-      scValidationDebugLog << "SCMachineList::Save(): with size = " << machine->currentSize << endl;
-      scValidationDebugLog << "SCMachineList::Save(): with history size = " << machine->currentHistorySize << endl;
+      scValidationDebugLog << "SCMachineList::Save(): using last stack elem for machine " << *machine << std::endl;
+      scValidationDebugLog << "SCMachineList::Save(): at offset = " << lastOffset << std::endl;
+      scValidationDebugLog << "SCMachineList::Save(): at history offset = " << lastHistoryOffset << std::endl;
+      scValidationDebugLog << "SCMachineList::Save(): with size = " << machine->currentSize << std::endl;
+      scValidationDebugLog << "SCMachineList::Save(): with history size = " << machine->currentHistorySize << std::endl;
 #endif
 
       // Neue Offset-Werte setzen (dies muss VOR Append() oder Save() geschehen!):
@@ -194,9 +194,9 @@ SCBoolean SCMachineList::Save(SCMem& saveArea) const
 
 #if _SC_VALIDATION_DEBUG >= 3
       scValidationDebugLog << "SCMachineList::Save(): setting new offset for machine " << *machine;
-      scValidationDebugLog << " on " << machine->GetLastOffset() << endl;
+      scValidationDebugLog << " on " << machine->GetLastOffset() << std::endl;
       scValidationDebugLog << "SCMachineList::Save(): setting new history offset for machine " << *machine;
-      scValidationDebugLog << " on " << machine->GetLastHistoryOffset() << endl;
+      scValidationDebugLog << " on " << machine->GetLastHistoryOffset() << std::endl;
 #endif
 
       saveArea.Append(*lastState,
@@ -212,9 +212,9 @@ SCBoolean SCMachineList::Save(SCMem& saveArea) const
 
 #if _SC_VALIDATION_DEBUG >= 3
       scValidationDebugLog << "SCMachineList::Save(): setting new offset for machine " << *machine;
-      scValidationDebugLog << " on " << machine->GetLastOffset() << endl;
+      scValidationDebugLog << " on " << machine->GetLastOffset() << std::endl;
       scValidationDebugLog << "SCMachineList::Save(): setting new history offset for machine " << *machine;
-      scValidationDebugLog << " on " << machine->GetLastHistoryOffset() << endl;
+      scValidationDebugLog << " on " << machine->GetLastHistoryOffset() << std::endl;
 #endif
 
       machine->Save(saveArea);
@@ -264,13 +264,13 @@ SCBoolean SCMachineList::Save(SCMem& saveArea) const
       }
 #endif  //  _SC_VALIDATION_OPTIMIZE >= 2
       scValidationDebugLog << ", offset now " << saveArea.GetOffset();
-      scValidationDebugLog << " histoffset now " << saveArea.GetHistoryOffset() << endl;
+      scValidationDebugLog << " histoffset now " << saveArea.GetHistoryOffset() << std::endl;
     }
     else
-    {      
+    {
       scValidationDebugLog << "SCMachineList::Save(): saved unchanged " << *machine;
       scValidationDebugLog << ", offset now " << saveArea.GetOffset();
-      scValidationDebugLog << " histoffset now " << saveArea.GetHistoryOffset() << endl;
+      scValidationDebugLog << " histoffset now " << saveArea.GetHistoryOffset() << std::endl;
     }
 #endif  //  _SC_VALIDATION_OPTIMIZE
 
@@ -279,7 +279,7 @@ SCBoolean SCMachineList::Save(SCMem& saveArea) const
 #if _SC_VALIDATION_DEBUG >= 2
     scValidationDebugLog << "SCMachineList::Save(): saved " << *machine;
     scValidationDebugLog << ", offset now " << saveArea.GetOffset();
-    scValidationDebugLog << " histoffset now " << saveArea.GetHistoryOffset() << endl;
+    scValidationDebugLog << " histoffset now " << saveArea.GetHistoryOffset() << std::endl;
 #endif
 
 #endif // _SC_VALIDATION_OPTIMIZE
@@ -363,7 +363,7 @@ SCBoolean SCMachineList::Restore(SCMem &saveArea)
 #if _SC_VALIDATION_DEBUG >= 2
       scValidationDebugLog << "SCMachineList::Restore(): skipped unchanged " << *machine;
       scValidationDebugLog << ", offset now " << saveArea.GetOffset() << "(+" << machine->currentSize << ")";
-      scValidationDebugLog << ", histoffset now " << saveArea.GetHistoryOffset() << "(+" << machine->currentHistorySize << ")" << endl;
+      scValidationDebugLog << ", histoffset now " << saveArea.GetHistoryOffset() << "(+" << machine->currentHistorySize << ")" << std::endl;
 #endif
     }
 
@@ -443,7 +443,7 @@ void SCMachineList::Size(SCSize *curSize) const
     scValidationDebugLog << ", size now " << curSize->size << "(+" << machine->GetCurrentSize() << ")";
     scValidationDebugLog << ", hist size now " << curSize->historySize << "(+" << machine->GetCurrentHistorySize() << ")";
 #endif
-    scValidationDebugLog << endl;
+    scValidationDebugLog << std::endl;
 #endif
 
 #if _SC_PROFILING

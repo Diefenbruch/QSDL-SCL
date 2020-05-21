@@ -63,7 +63,7 @@ template<class T> class SCList: public SCObject
     T *                    operator[] (SCNatural index) const {return (*GetElem(index))(); }
 
     virtual SCStream &     Display (SCStream &pStream) const;
-      
+
     SCBoolean              operator== (const SCList & second) const;
     SCBoolean              operator!= (const SCList & second) const;
 

@@ -145,11 +145,11 @@ void SCSensorDynFreq::Update (SCInteger sample, const SCNatural value)
       runnable->currentHistorySize += (sizeof(SCNatural) * (value - maxValue));
 
 #if _SC_VALIDATION_DEBUG >= 3
-      scValidationDebugLog << " to " << runnable->currentHistorySize << endl;
+      scValidationDebugLog << " to " << runnable->currentHistorySize << std::endl;
 #endif
 
     }
-#endif    
+#endif
 
     maxValue = value;
     delete[] oldFreq;

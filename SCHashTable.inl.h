@@ -75,6 +75,11 @@ _SCINLINE_ void SCHashTable::CalcBasicHashKey (const SCMem *state)
   m = -1;
   h = state->save_area_size / sizeof(long);   // Assumption: save_area is allocated
                                               // to sizeof(long) boundaries.
+
+#if _SC_VALIDATION_DEBUG >= 3
+  scValidationDebugLog << "SCHashTable::CalcBasicHashKey(): h (save area size) = " << h << std::endl;
+#endif
+
   q = (long *)state->save_area;               // 4 Strukturbytes als
                                               // long interpretieren
   do
@@ -82,7 +87,7 @@ _SCINLINE_ void SCHashTable::CalcBasicHashKey (const SCMem *state)
     m += m;
     if (m < 0)
     {
-      m ^= z;
+      m ^= z;                                 //  m = m XOR z (Bitwise XOR)
     }
 #if _SC_USE_STANDARD_BYTEORDER
     m ^= htonl(*q++);
@@ -90,13 +95,18 @@ _SCINLINE_ void SCHashTable::CalcBasicHashKey (const SCMem *state)
     m ^= *q++;
 #endif
   } while(--h > 0);
+
+#if _SC_VALIDATION_DEBUG >= 3
+  scValidationDebugLog << "SCHashTable::CalcBasicHashKey(): m = " << m << std::endl;
+#endif
+
 }
 
 
 _SCINLINE_ SCNatural SCHashTable::Holzmann1(const SCMem *state) 
 {
   CalcBasicHashKey(state);
-  
+
   return (m ^ (m >> (32 - hashTablePower))) & hashMask;
 }
 
@@ -124,13 +134,13 @@ _SCINLINE_ SCNatural SCHashTable::Multiply(const SCMem *state)
 {
   long double currentPhi = phi;
   long double hashFactor;
-  
+
   CalcBasicHashKey(state);
 
   currentPhi *= m;
 
   hashFactor = currentPhi - floor(currentPhi);
-  
+
   return (SCNatural) floor(hashTableSize * hashFactor);
 
 }
@@ -139,7 +149,7 @@ _SCINLINE_ SCNatural SCHashTable::Multiply(const SCMem *state)
 _SCINLINE_ SCNatural SCHashTable::Modulo(const SCMem *state)
 {
   CalcBasicHashKey(state);
-  
+
   return (m % primes[hashTablePower - 1]);
 
 }

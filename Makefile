@@ -516,18 +516,20 @@ SOURCES = $(SRCS) $(INSTANT)
 OBJS = $(addprefix $(OBJDIR)/, $(SOURCES:.cpp=.o))
 PSFILES	= $(HEADERS:.h=.ps)
 
-######################
-# 7. Makefileregeln: #
-######################
+##################################################
+# 7. Makefileregeln:                             #
+#    Abhängigkeiten hinter dem | Symbol sind     #
+#    logische aber keine Zeit-Abhängigkeiten!    #
+##################################################
 
-all: clean-rubbish $(OBJDIR) $(OUTPUT)
+all: $(OUTPUT) | clean-rubbish $(OBJDIR)
 
 $(OUTPUT): $(OBJS)
 	echo Constructing $(OUTPUT) ...
 	$(AR) $(ARFLAGS) $(OUTPUT) $(OBJS) \
 		2>> $(LOGFILE)
 
-$(OBJS): $(OBJDIR)
+$(OBJS): | $(OBJDIR)
 
 $(OBJDIR)/%.o : %.cpp
 	echo Compiling $< ...
@@ -538,7 +540,7 @@ $(OBJBASEDIR):
 		echo Creating $(OBJBASEDIR) ...; \
 		$(MKDIR) $(OBJBASEDIR); fi
 
-$(OBJDIR): $(OBJBASEDIR)
+$(OBJDIR): | $(OBJBASEDIR)
 	if [ ! \( -d $(OBJDIR) \) ]; then \
 		echo Creating $(OBJDIR) ...; \
 		$(MKDIR) $(OBJDIR); fi
@@ -562,12 +564,12 @@ $(PSDIR):
 	echo Generating   $(PSDIR)/$(notdir $@) form $< ...
 	$(MAKE_PS) $(MAKE_PS_FLAGS) $(PSDIR)/$(notdir $@) $<
 
-$(INCDIR): 
+$(INCDIR):
 	@if [ ! \( -d $(INCDIR) \) ]; then \
 		echo Creating $(INCDIR) ...; \
 		$(MKDIR) $(INCDIR); fi
 
-$(INCDIR)/SCL: $(INCDIR)
+$(INCDIR)/SCL: | $(INCDIR)
 	@if [ ! \( -d $(INCDIR)/SCL \) ]; then \
 		echo Creating $(INCDIR)/SCL ...; \
 		$(MKDIR) $(INCDIR)/SCL; fi
@@ -575,7 +577,7 @@ $(INCDIR)/SCL: $(INCDIR)
 $(DEPFILE):
 	$(TOUCH) $(DEPFILE)
 
-install-lib: $(OUTPUT) $(LIBDIR)
+install-lib: $(OUTPUT) | $(LIBDIR)
 	echo Deleting old library from $(LIBDIR) ...
 	-$(RM) $(LIBDIR)/$(OUTPUT)
 	echo Installing new library in $(LIBDIR) ...
@@ -592,7 +594,7 @@ install: install-includes install-lib
 
 release: install
 
-postscript: $(PSDIR) $(PSFILES)
+postscript: $(PSFILES) | $(PSDIR)
 
 print: postscript
 	for X in $(PSFILES); do \
@@ -606,7 +608,7 @@ backup: $(SOURCES) $(HEADERS) $(INLINES)
 	$(COMPRESS) $(BACKUP).$(TAR_SUFFIX)
 	-$(MV) $(BACKUP).$(TAR_SUFFIX).$(COMPRESS_SUFFIX) $(BACKUP).taz
 
-veryclean: clean clean-rcs 
+veryclean: clean clean-rcs
 	-$(RM) $(PSDIR)/*.$(PS_SUFFIX) *.$(PS_SUFFIX) *.$(TAR_SUFFIX) *.$(COMPRESS_SUFFIX) *.taz *tags 2!
 
 clean:

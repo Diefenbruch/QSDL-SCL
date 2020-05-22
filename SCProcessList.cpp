@@ -92,7 +92,7 @@ SCBoolean SCProcessList::Save(SCMem& saveArea) const
 
   //
   // First, we write the number of processs in this queue:
-  //  
+  //
   saveArea.HistoryStore(&numOfElems, sizeof(SCNatural));
 
   if (numOfElems == 0)
@@ -100,7 +100,7 @@ SCBoolean SCProcessList::Save(SCMem& saveArea) const
 
   // The following loop writes all processs which are in the current
   // queue, in the given saveArea:
-  
+
   for (ptr = head; ptr; ptr = ptr->Next())
   {
     process = (*ptr)();
@@ -164,7 +164,7 @@ SCBoolean SCProcessList::Save(SCMem& saveArea) const
 #endif  //  _SC_VALIDATION_OPTIMIZE >= 2
 
 #endif  //  _SC_VALIDATION_OPTIMIZE
- 
+
 #if _SC_VALIDATION_OPTIMIZE >= 3
 
     // Dritte Optimierungsstufe: Bei Processs die sich gegenueber dem letzten
@@ -177,9 +177,9 @@ SCBoolean SCProcessList::Save(SCMem& saveArea) const
     // gespeichert ist, an die aktuelle Position der saveArea kopiert.
 
     // letztes Stackelement (mit letztem Systemzustand) holen:
-    
+
     if (!process_modified &&  // Optimierung moeglich ?
-        (lastStackElem = ((SCIndetVal *)SCScheduler::GetIndet())->GetStack()->Top()) != NULL) 
+        (lastStackElem = ((SCIndetVal *)SCScheduler::GetIndet())->GetStack()->Top()) != NULL)
     {
       lastState = lastStackElem->GetState();
       assert(lastState);
@@ -274,7 +274,7 @@ SCBoolean SCProcessList::Save(SCMem& saveArea) const
       scValidationDebugLog << " histoffset now " << saveArea.GetHistoryOffset() << std::endl;
     }
     else
-    {      
+    {
       scValidationDebugLog << "SCProcessList::Save(): saved unchanged " << *process;
       scValidationDebugLog << ", offset now " << saveArea.GetOffset();
       scValidationDebugLog << " histoffset now " << saveArea.GetHistoryOffset() << std::endl;
@@ -323,7 +323,7 @@ SCBoolean SCProcessList::Restore(SCMem &saveArea)
 #endif
 
   RemoveAllElements();
-  
+
   saveArea.HistoryRestore(&number, sizeof(SCNatural)); // nicht in numOfElems einlesen!
 
   if (number == 0)

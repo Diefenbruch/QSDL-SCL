@@ -66,6 +66,14 @@ SCBitState::SCBitState (SCNatural hashTablePow,
 
   hashTablePower = hashTablePow;
   hashMask = (1L << hashTablePower) - 1;          // Set mask for hashfunctions.
+
+
+#if _SC_VALIDATION_DEBUG >= 3
+  scValidationDebugLog << "SCBitState::SCBitstate(): hashTablePow = " << hashTablePow << std::endl;
+  scValidationDebugLog << "SCBitState::SCBitstate(): hashTableSize = " << hashTableSize << std::endl;
+  scValidationDebugLog << "SCBitState::SCBitstate(): hashMask = " << hashMask << std::endl;
+#endif
+
 }
 
 
@@ -95,6 +103,14 @@ SCBoolean SCBitState::IsStateAnalyzed(SCMem *state)
     if (!(analyzedStates % _SC_PROGRESS_STEP)) { SCScheduler::outputStream << "#"; SCScheduler::outputStream.GetStream().flush(); }
 #endif
   }
+
+#if _SC_VALIDATION_DEBUG >= 3
+  scValidationDebugLog << "SCBitState::IsStateAnalyzed(): hash_value = " << hash_value << std::endl;
+  scValidationDebugLog << "SCBitState::IsStateAnalyzed(): table index: hash_value >> 3 = " << (hash_value >> 3) << std::endl;
+  scValidationDebugLog << "SCBitState::IsStateAnalyzed(): hash value lower bits: hash_value & 7L = " << (hash_value & 7L) << std::endl;
+  scValidationDebugLog << "SCBitState::IsStateAnalyzed(): table bit: 1 << (hash_value & 7L) = " << (1 << (hash_value & 7L)) << std::endl;
+  scValidationDebugLog << "SCBitState::IsStateAnalyzed(): result = " << (!result? 0:1)  << std::endl;
+#endif
 
   return(result);
 

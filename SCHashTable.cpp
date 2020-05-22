@@ -28,6 +28,7 @@
 #include "SCHashTable.h"
 #include "SCStream.h"
 #include "SCMem.h"
+#include "SCDebug.h"
 
 #if _SC_NOINLINES
   #include "SCHashTable.inl.h"
@@ -91,25 +92,25 @@ SCHashTable::SCHashTable (const SCStateSpaceType pType,
     case 1:
       hashFunction = &SCHashTable::Holzmann1;
       break;
-      
+
     case 2:
       hashFunction = &SCHashTable::Holzmann2;
       break;
-      
+
     case 3:
       hashFunction = &SCHashTable::Multiply;
       phi = 0.618033988749894903;
       break;
-      
+
     case 4:
       hashFunction = &SCHashTable::Multiply;
       phi = 0.612542337149213684;
       break;
-      
+
     case 5:
       hashFunction = &SCHashTable::Modulo;
       break;
-      
+
     default:
       assert (false);                         // Index out of range - bail out.
   }

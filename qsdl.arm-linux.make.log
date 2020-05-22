@@ -1,5 +1,0 @@
-SCMachineList.cpp: In member function 'virtual SCBoolean SCMachineList::Restore(SCMem&)':
-SCMachineList.cpp:300:18: warning: variable 'newCons' set but not used [-Wunused-but-set-variable]
-   SCMachineCons *newCons;
-                  ^~~~~~~
-ar: creating obj/arm-linux/libSCL.a

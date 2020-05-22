@@ -14,7 +14,7 @@ class SCStream: public SCObject
     SCStream(std::ostream &the_stream) : SCObject(SC_STREAM), scStream(&the_stream), deleteStream(false) {}
     SCStream(const char *fileName) : SCObject(SC_STREAM), scStream(new std::ofstream(fileName)), deleteStream(true) {}
     virtual ~SCStream(void) { if (deleteStream) delete scStream; }
-    
+
     SCStream& operator<<(char c) { Display(c); return *this;}
     SCStream& operator<<(unsigned char c) { Display(c); return *this;}
     SCStream& operator<<(signed char c) { Display(c); return *this;}
@@ -53,7 +53,7 @@ class SCStream: public SCObject
     virtual void Display(float n) { *scStream << n;}
     virtual void Display(long double n) { *scStream << n;}
     virtual void Display(sc_omanip func) { *scStream << func;}
-        
+
     virtual SCStream & Display (SCStream &pStream) const { return pStream; }
 
   private:
